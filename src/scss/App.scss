@@ -1,0 +1,18 @@
+@import url(./libs/_normalize.scss);
+
+body {
+	font-family: 'Arvo', serif;
+	font-size: 18px;
+	// background-color: rgba(98, 34, 84, 0.5);
+	// background-color: #a5c26e;
+}
+
+.container {
+	width: 1200px;
+	margin: 0 auto;
+	min-height: 100vh;
+}
+.content__wrapper {
+	display: flex;
+	gap: 15px;
+}

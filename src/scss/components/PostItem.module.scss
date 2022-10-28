@@ -1,0 +1,20 @@
+.item {
+	display: flex;
+	gap: 20px;
+	align-items: center;
+
+	.img {
+		width: 60px;
+		border-radius: 50%;
+	}
+
+	.name {
+		font-size: 20px;
+		margin-bottom: 7px;
+	}
+
+	.text {
+		display: block;
+		width: 100%;
+	}
+}

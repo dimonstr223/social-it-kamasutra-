@@ -1,0 +1,25 @@
+.content {
+	// background-color: rgba(90, 61, 145, 0.2);
+	// background-color: #dfd2dc;
+	background-color: #ded8e9;
+	padding: 20px;
+	width: 100%;
+
+	.profile__info {
+		display: flex;
+		gap: 30px;
+		margin-bottom: 50px;
+
+		.avatar {
+			width: 300px;
+			img {
+				width: 100%;
+			}
+		}
+
+		.name {
+			font-size: 24px;
+			margin-bottom: 10px;
+		}
+	}
+}

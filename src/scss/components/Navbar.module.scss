@@ -1,0 +1,19 @@
+.nav {
+	background-color: #2f0e44;
+	padding: 20px;
+
+	a {
+		color: #ffa8c3;
+		font-size: 20px;
+		text-transform: uppercase;
+		letter-spacing: 3px;
+		transition: color 0.15s ease-in-out;
+
+		&:hover {
+			color: #fff;
+		}
+		&:active {
+			color: #ffa8c3;
+		}
+	}
+}
