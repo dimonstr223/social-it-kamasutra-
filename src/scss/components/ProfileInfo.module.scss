@@ -1,0 +1,17 @@
+.profile__info {
+	display: flex;
+	gap: 30px;
+	margin-bottom: 50px;
+
+	.avatar {
+		width: 300px;
+		img {
+			width: 100%;
+		}
+	}
+
+	.name {
+		font-size: 24px;
+		margin-bottom: 10px;
+	}
+}

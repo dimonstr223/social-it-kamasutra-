@@ -1,12 +1,21 @@
-$mainPurple: #2f0e44;
+$mainPurple: rgb(47, 14, 68);
 
-$mainHover: rgba($mainPurple, 0.8);
+$mainAction: #4c2e63;
 
 $lightPurple: #c4b2e4;
 
 $accentPink: #ffa8c3;
 
 $contentBG: #ded8e9;
+
+%hover {
+	background-color: $mainAction;
+	color: #fff;
+}
+%active {
+	background-color: $mainPurple;
+	color: $accentPink;
+}
 
 %button {
 	margin-top: 10px;
@@ -22,11 +31,10 @@ $contentBG: #ded8e9;
 	transition: background 0.15s ease-in-out, color 0.15s ease-in-out;
 
 	&:hover {
-		background-color: $mainHover;
-		color: #fff;
+		@extend %hover;
 	}
+
 	&:active {
-		background-color: $mainPurple;
-		color: $accentPink;
+		@extend %active;
 	}
 }

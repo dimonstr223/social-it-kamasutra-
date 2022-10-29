@@ -2,7 +2,6 @@
 
 .nav {
 	background-color: $mainPurple;
-
 	.list {
 		a {
 			display: block;
@@ -11,14 +10,17 @@
 			font-size: 20px;
 			text-transform: uppercase;
 			letter-spacing: 3px;
-			transition: color 0.15s ease-in-out;
+			transition: color 0.15s ease-in-out, background 0.15s ease-in-out;
 
 			&:hover {
-				color: #fff;
+				@extend %hover;
 			}
 			&:active {
-				color: $accentPink;
+				@extend %active;
 			}
+		}
+		.active {
+			@extend %hover;
 		}
 	}
 }
