@@ -20,7 +20,7 @@ const Navbar = () => {
 						to='/dialogs'
 						className={nav => (nav.isActive ? style.active : style.item)}
 					>
-						dialogs
+						messages
 					</NavLink>
 				</li>
 			</ul>

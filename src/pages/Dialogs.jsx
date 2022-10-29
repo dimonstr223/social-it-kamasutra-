@@ -19,7 +19,6 @@ const DialogsItem = ({ name, id }) => {
 		</li>
 	)
 }
-
 const Message = ({ message }) => {
 	return (
 		<div>
@@ -28,22 +27,34 @@ const Message = ({ message }) => {
 	)
 }
 
+const dialogsData = [
+	{ id: 1, name: 'Pain' },
+	{ id: 2, name: 'Itachi' },
+	{ id: 3, name: 'Kisame' },
+	{ id: 4, name: 'Sasori' },
+	{ id: 5, name: 'Konan' },
+	{ id: 6, name: 'Hidan' },
+	{ id: 7, name: 'Kakuzu' },
+]
+const messagesData = [
+	{ id: 1, message: 'Hello. Did you katch Naruto and his demon chakura?' },
+]
+
+const dialogsElements = dialogsData.map(dialog => (
+	<DialogsItem key={dialog.id} name={dialog.name} id={dialog.id} />
+))
+const messagesElements = messagesData.map(message => (
+	<Message message={message.message} />
+))
+
 const Dialogs = () => {
 	return (
 		<div className={style.dialogs__wrapper}>
 			<div className={style.dialogs}>
 				<h2>Dialogs</h2>
-				<ul className={style.list}>
-					<DialogsItem name='Pain' id='1' />
-					<DialogsItem name='Itachi' id='2' />
-					<DialogsItem name='Kisame' id='3' />
-					<DialogsItem name='Sasori' id='4' />
-					<DialogsItem name='Konan' id='5' />
-				</ul>
+				<ul className={style.list}>{dialogsElements}</ul>
 			</div>
-			<div className={style.messages}>
-				<Message message='Hello. Did you katch Naruto and his demon chakura?' />
-			</div>
+			<div className={style.messages}>{messagesElements}</div>
 		</div>
 	)
 }

@@ -15,9 +15,9 @@
 			&:hover {
 				@extend %hover;
 			}
-			&:active {
-				@extend %active;
-			}
+			// &:active {
+			// 	@extend %active;
+			// }
 		}
 		.active {
 			@extend %hover;
