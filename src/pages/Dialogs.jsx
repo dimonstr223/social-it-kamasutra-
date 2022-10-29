@@ -30,7 +30,7 @@ const Dialogs = () => {
 			</div>
 			<div className={style.messages}>
 				<div>
-					<p className={style.text}>Ало, когда девятихвостого принесёшь? </p>
+					<p className={style.text}>Ало, когда девятихвостого принесёшь?</p>
 				</div>
 			</div>
 		</div>

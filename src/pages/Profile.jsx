@@ -2,6 +2,7 @@ import React from 'react'
 
 import style from '../scss/pages/Profile.module.scss'
 import Posts from '../components/Posts'
+import { Link } from 'react-router-dom'
 
 const Profile = () => {
 	return (

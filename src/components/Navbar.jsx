@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import style from '../scss/components/Navbar.module.scss'
 
@@ -7,10 +8,10 @@ const Navbar = () => {
 		<nav className={style.nav}>
 			<ul className={style.list}>
 				<li>
-					<a href='#'>profile</a>
+					<Link to='/profile'>profile</Link>
 				</li>
 				<li>
-					<a href='#'>dialogs</a>
+					<Link to='/dialogs'>dialogs</Link>
 				</li>
 			</ul>
 		</nav>
