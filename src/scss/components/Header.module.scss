@@ -1,5 +1,7 @@
+@import '../variables.scss';
+
 .header {
-	background-color: #2f0e44;
+	background-color: $mainPurple;
 	margin-bottom: 15px;
 
 	.logo {
@@ -14,7 +16,7 @@
 		.title {
 			text-transform: uppercase;
 			letter-spacing: 5px;
-			color: #ffa8c3;
+			color: $accentPink;
 			font-weight: 700;
 			font-size: 26px;
 		}

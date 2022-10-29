@@ -15,7 +15,7 @@ const Posts = () => {
 				</div>
 			</div>
 			<ul className={style.post__list}>
-				<PostItem />
+				<PostItem message='Wussap baby. Want some chill? ^_^' />
 			</ul>
 		</div>
 	)

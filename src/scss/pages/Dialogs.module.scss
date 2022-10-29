@@ -1,0 +1,52 @@
+@import '../variables.scss';
+
+.dialogs__wrapper {
+	display: flex;
+	h2 {
+		font-size: 24px;
+		padding: 20px;
+	}
+	.dialogs {
+		background-color: $lightPurple;
+
+		.list {
+			width: 300px;
+			.item {
+				&__active {
+					background-color: #ded8e9;
+					a {
+						padding: 20px;
+						display: flex;
+						gap: 20px;
+						align-items: center;
+
+						img {
+							width: 60px;
+							border-radius: 50%;
+						}
+					}
+				}
+
+				a {
+					padding: 20px;
+					display: flex;
+					gap: 20px;
+					align-items: center;
+
+					img {
+						width: 60px;
+						border-radius: 50%;
+					}
+				}
+			}
+		}
+	}
+	.messages {
+		div {
+			padding: 20px;
+			p {
+				display: block;
+			}
+		}
+	}
+}

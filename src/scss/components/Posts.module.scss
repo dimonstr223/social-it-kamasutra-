@@ -1,5 +1,7 @@
+@import '../variables.scss';
+
 .post {
-	background-color: #c4b2e4;
+	background-color: $lightPurple;
 	padding: 15px;
 
 	.wrapper {
@@ -13,29 +15,12 @@
 				width: 100%;
 				font-family: 'Arvo', serif;
 				font-size: 18px;
+				padding: 10px;
+				border: none;
 			}
 
 			.btn {
-				margin-top: 10px;
-				font-family: 'Arvo', serif;
-				background-color: #2f0e44;
-				color: #ffa8c3;
-				border: none;
-				padding: 15px;
-				cursor: pointer;
-				text-transform: uppercase;
-				font-size: 14px;
-				letter-spacing: 3px;
-				transition: background 0.15s ease-in-out, color 0.15s ease-in-out;
-
-				&:hover {
-					background-color: rgba(47, 14, 68, 0.8);
-					color: #fff;
-				}
-				&:active {
-					background-color: #2f0e44;
-					color: #ffa8c3;
-				}
+				@extend %button;
 			}
 		}
 	}
