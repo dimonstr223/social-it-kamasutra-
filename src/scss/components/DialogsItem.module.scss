@@ -1,0 +1,16 @@
+@import '../variables';
+
+a {
+	padding: 20px;
+	display: flex;
+	gap: 20px;
+	align-items: center;
+
+	img {
+		width: 60px;
+		border-radius: 50%;
+	}
+}
+.active {
+	background: $contentBG;
+}
