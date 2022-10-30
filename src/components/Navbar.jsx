@@ -1,9 +1,10 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 import style from '../scss/components/Navbar.module.scss'
+import Friends from './Friends'
 
-const Navbar = () => {
+const Navbar = ({ sidebar }) => {
 	return (
 		<nav className={style.nav}>
 			<ul className={style.list}>
@@ -24,6 +25,8 @@ const Navbar = () => {
 					</NavLink>
 				</li>
 			</ul>
+
+			<Friends friends={sidebar.friends} />
 		</nav>
 	)
 }

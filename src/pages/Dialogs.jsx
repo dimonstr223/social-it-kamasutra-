@@ -5,27 +5,14 @@ import Message from '../components/Message'
 
 import style from '../scss/pages/Dialogs.module.scss'
 
-const dialogsData = [
-	{ id: 1, name: 'Pain' },
-	{ id: 2, name: 'Itachi' },
-	{ id: 3, name: 'Kisame' },
-	{ id: 4, name: 'Sasori' },
-	{ id: 5, name: 'Konan' },
-	{ id: 6, name: 'Hidan' },
-	{ id: 7, name: 'Kakuzu' },
-]
-const messagesData = [
-	{ id: 1, message: 'Hello. Did you katch Naruto and his demon chakura?' },
-]
+const Dialogs = ({ dialogsPage }) => {
+	const dialogsElements = dialogsPage.dialogs.map(dialog => (
+		<DialogsItem key={dialog.id} name={dialog.name} id={dialog.id} />
+	))
+	const messagesElements = dialogsPage.messages.map(message => (
+		<Message key={message.id} message={message.message} />
+	))
 
-const dialogsElements = dialogsData.map(dialog => (
-	<DialogsItem key={dialog.id} name={dialog.name} id={dialog.id} />
-))
-const messagesElements = messagesData.map(message => (
-	<Message message={message.message} />
-))
-
-const Dialogs = () => {
 	return (
 		<div className={style.dialogs__wrapper}>
 			<div className={style.dialogs}>

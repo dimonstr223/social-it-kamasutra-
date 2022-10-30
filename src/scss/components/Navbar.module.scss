@@ -3,24 +3,25 @@
 .nav {
 	background-color: $mainPurple;
 	.list {
-		a {
-			display: block;
-			padding: 20px 20px 15px 20px;
-			color: $accentPink;
-			font-size: 20px;
-			text-transform: uppercase;
-			letter-spacing: 3px;
-			transition: color 0.15s ease-in-out, background 0.15s ease-in-out;
+		margin-bottom: 50px;
+	}
+	.active {
+		@extend %hover;
+	}
+	a {
+		display: block;
+		padding: 20px 20px 15px 20px;
+		color: $accentPink;
+		font-size: 20px;
+		text-transform: uppercase;
+		letter-spacing: 3px;
+		transition: color 0.15s ease-in-out, background 0.15s ease-in-out;
 
-			&:hover {
-				@extend %hover;
-			}
-			// &:active {
-			// 	@extend %active;
-			// }
-		}
-		.active {
+		&:hover {
 			@extend %hover;
 		}
+		// &:active {
+		// 	@extend %active;
+		// }
 	}
 }

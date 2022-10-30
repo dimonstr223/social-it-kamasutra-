@@ -4,13 +4,11 @@ import style from '../../scss/components/Posts.module.scss'
 
 import PostItem from './PostItem'
 
-const postsData = [{ id: 1, message: 'Wussap baby. Want some chill? ^_^' }]
+const Posts = ({ posts }) => {
+	const postsElements = posts.map(post => (
+		<PostItem key={post.id} message={post.message} />
+	))
 
-const postsElements = postsData.map(post => (
-	<PostItem key={post.id} message={post.message} />
-))
-
-const Posts = () => {
 	return (
 		<div className={style.post}>
 			<div className={style.wrapper}>
