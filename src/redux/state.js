@@ -1,3 +1,8 @@
+const UPDATE_POST_TEXT = 'UPDATE_POST_TEXT'
+const ADD_POST = 'ADD_POST'
+const UPDATE_MESSAGE_TEXT = 'UPDATE_MESSAGE_TEXT'
+const SEND_MESSAGE = 'SEND_MESSAGE'
+
 const store = {
 	_state: {
 		profilePage: {
@@ -20,6 +25,7 @@ const store = {
 					message: 'Hello. Did you katch Naruto and his demon chakura?',
 				},
 			],
+			newMessageText: '',
 		},
 		sidebar: {
 			friends: [
@@ -53,11 +59,11 @@ const store = {
 	},
 
 	dispatch(action) {
-		if (action.type === 'UPDATE-POST-TEXT') {
+		if (action.type === UPDATE_POST_TEXT) {
 			this._state.profilePage.newPostText = action.postText
 			this._callSubscriber(this._state)
 		}
-		if (action.type === 'ADD-POST') {
+		if (action.type === ADD_POST) {
 			const newPost = {
 				id: 2,
 				message: this._state.profilePage.newPostText,
@@ -66,7 +72,35 @@ const store = {
 			this._state.profilePage.newPostText = ''
 			this._callSubscriber(this._state)
 		}
+		if (action.type === UPDATE_MESSAGE_TEXT) {
+			this._state.dialogsPage.newMessageText = action.messageText
+			this._callSubscriber(this._state)
+		}
+		if (action.type === SEND_MESSAGE) {
+			const newMessage = {
+				id: 2,
+				message: this._state.dialogsPage.newMessageText,
+			}
+			this._state.dialogsPage.messages.push(newMessage)
+			this._state.dialogsPage.newMessageText = ''
+			this._callSubscriber(this._state)
+		}
 	},
 }
+
+export const updatePostTextCreator = postText => ({
+	type: UPDATE_POST_TEXT,
+	postText,
+})
+export const addPostCreator = () => ({ type: ADD_POST })
+
+export const updateMessageTextCreator = messageText => ({
+	type: UPDATE_MESSAGE_TEXT,
+	messageText,
+})
+
+export const sendMessageCreator = () => ({ type: SEND_MESSAGE })
+
+window.store = store
 
 export default store

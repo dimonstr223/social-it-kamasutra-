@@ -9,14 +9,9 @@
 		h3 {
 			margin-bottom: 10px;
 		}
-		.addPost {
+		.communication {
 			.input {
-				height: 50px;
-				width: 100%;
-				font-family: 'Arvo', serif;
-				font-size: 18px;
-				padding: 10px;
-				border: none;
+				@extend %input;
 			}
 
 			.btn {

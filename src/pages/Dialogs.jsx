@@ -2,10 +2,11 @@ import React from 'react'
 
 import DialogsItem from '../components/DialogsItem'
 import Message from '../components/Message'
+import { sendMessageCreator, updateMessageTextCreator } from '../redux/state'
 
 import style from '../scss/pages/Dialogs.module.scss'
 
-const Dialogs = ({ dialogsPage }) => {
+const Dialogs = ({ dialogsPage, dispatch }) => {
 	const dialogsElements = dialogsPage.dialogs.map(dialog => (
 		<DialogsItem key={dialog.id} name={dialog.name} id={dialog.id} />
 	))
@@ -13,13 +14,37 @@ const Dialogs = ({ dialogsPage }) => {
 		<Message key={message.id} message={message.message} />
 	))
 
+	const onMessageChange = e => {
+		const text = e.target.value
+		const action = updateMessageTextCreator(text)
+		dispatch(action)
+	}
+
+	const onSendMessage = () => {
+		dispatch(sendMessageCreator())
+	}
+
 	return (
 		<div className={style.dialogs__wrapper}>
 			<div className={style.dialogs}>
 				<h2>Dialogs</h2>
 				<ul className={style.list}>{dialogsElements}</ul>
 			</div>
-			<div className={style.messages}>{messagesElements}</div>
+
+			<div className={style.messages__wrapper}>
+				<div className={style.messages}>{messagesElements}</div>
+				<div className={style.communication}>
+					<textarea
+						onChange={onMessageChange}
+						value={dialogsPage.newMessageText}
+						className={style.input}
+						type='text'
+					/>
+					<button onClick={onSendMessage} className={style.btn}>
+						Send
+					</button>
+				</div>
+			</div>
 		</div>
 	)
 }

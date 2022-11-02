@@ -17,6 +17,15 @@ $contentBG: #ded8e9;
 	color: $accentPink;
 }
 
+%input {
+	height: 50px;
+	width: 100%;
+	font-family: 'Arvo', serif;
+	font-size: 18px;
+	padding: 10px;
+	border: none;
+}
+
 %button {
 	margin-top: 10px;
 	font-family: 'Arvo', serif;

@@ -1,4 +1,5 @@
 import React from 'react'
+import { addPostCreator, updatePostTextCreator } from '../../redux/state'
 
 import style from '../../scss/components/Posts.module.scss'
 
@@ -12,13 +13,13 @@ const Posts = ({ profilePage, dispatch }) => {
 	const postRef = React.useRef(null)
 
 	const onPostChange = () => {
-		const postText = postRef.current.value
-		const action = { type: 'UPDATE-POST-TEXT', postText }
+		const text = postRef.current.value
+		const action = updatePostTextCreator(text)
 		dispatch(action)
 	}
 
 	const onAddPost = () => {
-		const action = { type: 'ADD-POST' }
+		const action = addPostCreator()
 		dispatch(action)
 	}
 
@@ -26,7 +27,7 @@ const Posts = ({ profilePage, dispatch }) => {
 		<div className={style.post}>
 			<div className={style.wrapper}>
 				<h3>Posts</h3>
-				<div className={style.addPost}>
+				<div className={style.communication}>
 					<textarea
 						onChange={onPostChange}
 						value={profilePage.newPostText}
