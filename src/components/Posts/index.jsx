@@ -1,5 +1,8 @@
 import React from 'react'
-import { addPostCreator, updatePostTextCreator } from '../../redux/state'
+import {
+	addPostCreator,
+	updatePostTextCreator,
+} from '../../redux/reducers/profileReducer'
 
 import style from '../../scss/components/Posts.module.scss'
 

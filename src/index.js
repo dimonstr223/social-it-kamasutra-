@@ -1,4 +1,4 @@
-import store from './redux/state'
+import store from './redux/redux-store'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
@@ -9,11 +9,14 @@ const root = ReactDOM.createRoot(document.getElementById('root'))
 let rerenderUI = state => {
 	root.render(
 		<BrowserRouter>
-			<App state={store.getState()} dispatch={store.dispatch.bind(store)} />
+			<App state={state} dispatch={store.dispatch.bind(store)} />
 		</BrowserRouter>
 	)
 }
 
 rerenderUI(store.getState())
 
-store.subscribe(rerenderUI)
+store.subscribe(() => {
+	const state = store.getState()
+	rerenderUI(state)
+})
