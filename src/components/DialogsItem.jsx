@@ -3,7 +3,7 @@ import style from '../scss/components/DialogsItem.module.scss'
 
 const DialogsItem = ({ name, id }) => {
 	return (
-		<li>
+		<li className={style.listItem}>
 			<NavLink
 				className={nav => (nav.isActive ? style.active : style.item)}
 				to={`/dialogs/${id}`}

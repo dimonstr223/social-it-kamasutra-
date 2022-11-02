@@ -5,7 +5,7 @@ import Profile from './pages/Profile'
 import Dialogs from './pages/Dialogs'
 import { Route, Routes } from 'react-router-dom'
 
-const App = ({ state }) => {
+const App = ({ state, updatePostText, addPost }) => {
 	return (
 		<div className='container'>
 			<Header />
@@ -15,7 +15,13 @@ const App = ({ state }) => {
 					<Routes>
 						<Route
 							path='/profile'
-							element={<Profile profilePage={state.profilePage} />}
+							element={
+								<Profile
+									profilePage={state.profilePage}
+									updatePostText={updatePostText}
+									addPost={addPost}
+								/>
+							}
 						/>
 						<Route
 							path='/dialogs/*'
