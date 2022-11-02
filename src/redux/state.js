@@ -44,27 +44,28 @@ const store = {
 			],
 		},
 	},
-	getState(state) {
+	getState() {
 		return this._state
 	},
-
 	_callSubscriber() {},
-
-	updatePostText(postText) {
-		this._state.profilePage.newPostText = postText
-	},
-
-	addPost() {
-		const newPost = {
-			id: 2,
-			message: this._state.profilePage.newPostText,
-		}
-		this._state.profilePage.posts.push(newPost)
-		this._callSubscriber(this._state)
-	},
-
 	subscribe(observer) {
 		this._callSubscriber = observer
+	},
+
+	dispatch(action) {
+		if (action.type === 'UPDATE-POST-TEXT') {
+			this._state.profilePage.newPostText = action.postText
+			this._callSubscriber(this._state)
+		}
+		if (action.type === 'ADD-POST') {
+			const newPost = {
+				id: 2,
+				message: this._state.profilePage.newPostText,
+			}
+			this._state.profilePage.posts.push(newPost)
+			this._state.profilePage.newPostText = ''
+			this._callSubscriber(this._state)
+		}
 	},
 }
 

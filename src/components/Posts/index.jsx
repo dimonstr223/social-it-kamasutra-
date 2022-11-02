@@ -4,7 +4,7 @@ import style from '../../scss/components/Posts.module.scss'
 
 import PostItem from './PostItem'
 
-const Posts = ({ profilePage, updatePostText, addPost }) => {
+const Posts = ({ profilePage, dispatch }) => {
 	const postsElements = profilePage.posts.map((post, i) => (
 		<PostItem key={i} message={post.message} />
 	))
@@ -13,12 +13,13 @@ const Posts = ({ profilePage, updatePostText, addPost }) => {
 
 	const onPostChange = () => {
 		const postText = postRef.current.value
-		updatePostText(postText)
+		const action = { type: 'UPDATE-POST-TEXT', postText }
+		dispatch(action)
 	}
 
 	const onAddPost = () => {
-		// const postText = profilePage.newPostText
-		addPost()
+		const action = { type: 'ADD-POST' }
+		dispatch(action)
 	}
 
 	return (
@@ -28,6 +29,7 @@ const Posts = ({ profilePage, updatePostText, addPost }) => {
 				<div className={style.addPost}>
 					<textarea
 						onChange={onPostChange}
+						value={profilePage.newPostText}
 						ref={postRef}
 						className={style.input}
 						type='text'
