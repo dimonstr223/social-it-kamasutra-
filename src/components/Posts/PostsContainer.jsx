@@ -4,8 +4,10 @@ import {
 	addPostCreator,
 	updatePostTextCreator,
 } from '../../redux/reducers/profileReducer'
+import StoreContext from '../../redux/StoreContext'
 
-const PostsContainer = ({ store }) => {
+const PostsContainer = () => {
+	const store = React.useContext(StoreContext)
 	const state = store.getState()
 
 	const onPostChange = text => {

@@ -4,11 +4,11 @@ import style from '../scss/pages/Profile.module.scss'
 import ProfileInfo from '../components/ProfileInfo'
 import PostsContainer from '../components/Posts/PostsContainer'
 
-const Profile = ({ store }) => {
+const Profile = () => {
 	return (
 		<>
 			<ProfileInfo />
-			<PostsContainer store={store} />
+			<PostsContainer />
 		</>
 	)
 }

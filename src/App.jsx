@@ -13,11 +13,8 @@ const App = ({ state, dispatch, store }) => {
 				<Navbar sidebar={state.sidebar} />
 				<div className='content'>
 					<Routes>
-						<Route path='/profile' element={<Profile store={store} />} />
-						<Route
-							path='/dialogs/*'
-							element={<DialogsContainer store={store} />}
-						/>
+						<Route path='/profile' element={<Profile />} />
+						<Route path='/dialogs/*' element={<DialogsContainer />} />
 					</Routes>
 				</div>
 			</div>

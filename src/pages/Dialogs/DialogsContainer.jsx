@@ -5,8 +5,10 @@ import {
 	sendMessageCreator,
 	updateMessageTextCreator,
 } from '../../redux/reducers/dialogsReducer'
+import StoreContext from '../../redux/StoreContext'
 
-const DialogsContainer = ({ dialogsPage, store }) => {
+const DialogsContainer = () => {
+	const store = React.useContext(StoreContext)
 	const state = store.getState()
 
 	const onMessageChange = text => {
