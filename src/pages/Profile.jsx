@@ -1,14 +1,14 @@
 import React from 'react'
 
 import style from '../scss/pages/Profile.module.scss'
-import Posts from '../components/Posts'
 import ProfileInfo from '../components/ProfileInfo'
+import PostsContainer from '../components/Posts/PostsContainer'
 
-const Profile = ({ profilePage, dispatch }) => {
+const Profile = ({ store }) => {
 	return (
 		<>
 			<ProfileInfo />
-			<Posts profilePage={profilePage} dispatch={dispatch} />
+			<PostsContainer store={store} />
 		</>
 	)
 }

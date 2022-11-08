@@ -1,15 +1,11 @@
 import React from 'react'
 
-import DialogsItem from '../components/DialogsItem'
-import Message from '../components/Message'
-import {
-	sendMessageCreator,
-	updateMessageTextCreator,
-} from '../redux/reducers/dialogsReducer'
+import DialogsItem from '../../components/DialogsItem'
+import Message from '../../components/Message'
 
-import style from '../scss/pages/Dialogs.module.scss'
+import style from '../../scss/pages/Dialogs.module.scss'
 
-const Dialogs = ({ dialogsPage, dispatch }) => {
+const Dialogs = ({ dialogsPage, updateMessageText, sendMessage }) => {
 	const dialogsElements = dialogsPage.dialogs.map(dialog => (
 		<DialogsItem key={dialog.id} name={dialog.name} id={dialog.id} />
 	))
@@ -19,12 +15,11 @@ const Dialogs = ({ dialogsPage, dispatch }) => {
 
 	const onMessageChange = e => {
 		const text = e.target.value
-		const action = updateMessageTextCreator(text)
-		dispatch(action)
+		updateMessageText(text)
 	}
 
 	const onSendMessage = () => {
-		dispatch(sendMessageCreator())
+		sendMessage()
 	}
 
 	return (

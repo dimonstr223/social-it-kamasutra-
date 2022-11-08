@@ -1,14 +1,11 @@
 import React from 'react'
-import {
-	addPostCreator,
-	updatePostTextCreator,
-} from '../../redux/reducers/profileReducer'
+import { addPostCreator } from '../../redux/reducers/profileReducer'
 
 import style from '../../scss/components/Posts.module.scss'
 
 import PostItem from './PostItem'
 
-const Posts = ({ profilePage, dispatch }) => {
+const Posts = ({ profilePage, updatePostText, addPost }) => {
 	const postsElements = profilePage.posts.map((post, i) => (
 		<PostItem key={i} message={post.message} />
 	))
@@ -17,13 +14,11 @@ const Posts = ({ profilePage, dispatch }) => {
 
 	const onPostChange = () => {
 		const text = postRef.current.value
-		const action = updatePostTextCreator(text)
-		dispatch(action)
+		updatePostText(text)
 	}
 
 	const onAddPost = () => {
-		const action = addPostCreator()
-		dispatch(action)
+		addPost()
 	}
 
 	return (
