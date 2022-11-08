@@ -1,5 +1,4 @@
 import React from 'react'
-import { addPostCreator } from '../../redux/reducers/profileReducer'
 
 import style from '../../scss/components/Posts.module.scss'
 
