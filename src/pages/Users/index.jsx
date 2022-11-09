@@ -5,35 +5,79 @@ import style from '../../scss/pages/Users.module.scss'
 
 import avatarDefault from '../../img/avatar-default.jpg'
 
-const Users = ({ users, follow, unfollow, setUsers }) => {
-	React.useEffect(() => {
+class Users extends React.Component {
+	constructor(props) {
+		super(props)
+
 		axios
 			.get(`https://social-network.samuraijs.com/api/1.0/users`)
-			.then(res => setUsers(res.data.items))
-	}, [])
-
-	const usersElements = users.map(user => (
-		<li key={user.id}>
-			<div className={style.users__img}>
-				<img
-					src={user.photos.small === null ? avatarDefault : user.photos.small}
-					alt='user avatar'
-				/>
+			.then(res => this.props.setUsers(res.data.items))
+	}
+	render() {
+		return (
+			<div>
+				<ul className={style.users__list}>
+					{this.props.users.map(user => (
+						<li key={user.id}>
+							<div className={style.users__img}>
+								<img
+									src={
+										user.photos.small === null
+											? avatarDefault
+											: user.photos.small
+									}
+									alt='user avatar'
+								/>
+							</div>
+							<h3>{user.name}</h3>
+							{user.followed ? (
+								<button onClick={() => this.props.unfollow(user.id)}>
+									unfollow
+								</button>
+							) : (
+								<button onClick={() => this.props.follow(user.id)}>
+									follow
+								</button>
+							)}
+						</li>
+					))}
+				</ul>
 			</div>
-			<h3>{user.name}</h3>
-			{user.followed ? (
-				<button onClick={() => unfollow(user.id)}>unfollow</button>
-			) : (
-				<button onClick={() => follow(user.id)}>follow</button>
-			)}
-		</li>
-	))
-
-	return (
-		<div>
-			<ul className={style.users__list}>{usersElements}</ul>
-		</div>
-	)
+		)
+	}
 }
+
+// const Users = ({ users, follow, unfollow, setUsers }) => {
+// 	React.useEffect(() => {
+// 		axios
+// 			.get(`https://social-network.samuraijs.com/api/1.0/users`)
+// 			.then(res => setUsers(res.data.items))
+// 	}, [])
+
+// 	return (
+// 		<div>
+// 			<ul className={style.users__list}>
+// 				{users.map(user => (
+// 					<li key={user.id}>
+// 						<div className={style.users__img}>
+// 							<img
+// 								src={
+// 									user.photos.small === null ? avatarDefault : user.photos.small
+// 								}
+// 								alt='user avatar'
+// 							/>
+// 						</div>
+// 						<h3>{user.name}</h3>
+// 						{user.followed ? (
+// 							<button onClick={() => unfollow(user.id)}>unfollow</button>
+// 						) : (
+// 							<button onClick={() => follow(user.id)}>follow</button>
+// 						)}
+// 					</li>
+// 				))}
+// 			</ul>
+// 		</div>
+// 	)
+// }
 
 export default Users
