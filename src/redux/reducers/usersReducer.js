@@ -3,20 +3,7 @@ const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 
 const initialState = {
-	users: [
-		{
-			id: 1,
-			name: 'Orochimaru',
-			followed: false,
-			image: '',
-		},
-		{
-			id: 2,
-			name: 'Sasuke',
-			followed: false,
-			image: '',
-		},
-	],
+	users: [],
 }
 
 const usersReducer = (state = initialState, action) => {
@@ -44,7 +31,7 @@ const usersReducer = (state = initialState, action) => {
 		case SET_USERS:
 			return {
 				...state,
-				users: [...state.users, action.users],
+				users: [...state.users, ...action.users],
 			}
 
 		default:
