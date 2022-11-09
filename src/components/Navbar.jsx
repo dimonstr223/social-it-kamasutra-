@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 import style from '../scss/components/Navbar.module.scss'
 import Friends from './Friends'
@@ -22,6 +22,14 @@ const Navbar = ({ sidebar }) => {
 						className={nav => (nav.isActive ? style.active : style.item)}
 					>
 						messages
+					</NavLink>
+				</li>
+				<li className={style.item}>
+					<NavLink
+						to='/users'
+						className={nav => (nav.isActive ? style.active : style.item)}
+					>
+						users
 					</NavLink>
 				</li>
 			</ul>
