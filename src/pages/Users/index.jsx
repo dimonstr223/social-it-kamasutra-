@@ -12,6 +12,7 @@ const Users = ({
 	follow,
 	unfollow,
 	onClickPage,
+	isFetching,
 }) => {
 	const pagesCount = Math.ceil(totalUsersCount / pageSize)
 	const pages = []
@@ -19,7 +20,6 @@ const Users = ({
 	for (let i = 1; i <= pagesCount; i++) {
 		pages.push(i)
 	}
-	console.log(pages)
 
 	return (
 		<div>
