@@ -1,19 +1,21 @@
 import React from 'react'
 
 import style from '../scss/components/ProfileInfo.module.scss'
+import Preloader from './common/preloader'
+import avaDefault from '../img/avatar-default.jpg'
 
-const ProfileInfo = () => {
+const ProfileInfo = ({ userProfile }) => {
+	if (!userProfile) {
+		return <Preloader />
+	}
 	return (
 		<div className={style.profile__info}>
 			<div className={style.avatar}>
-				<img
-					src='https://i.pinimg.com/originals/55/de/e5/55dee5ff7e2e3537c0d9f22fce6141b1.jpg'
-					alt='avatar'
-				/>
+				<img src={userProfile.photos.large || avaDefault} alt='avatar' />
 			</div>
 			<div className={style.description}>
-				<h3 className={style.name}> Dima Mikuluca</h3>
-				<div className={style.status}>Im insane programmer</div>
+				<h3 className={style.name}> {userProfile.fullName}</h3>
+				<div className={style.status}>{userProfile.aboutMe}</div>
 			</div>
 		</div>
 	)

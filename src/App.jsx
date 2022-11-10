@@ -1,10 +1,10 @@
 import './scss/App.scss'
 import Header from './components/Header'
 import Navbar from './components/Navbar'
-import Profile from './pages/Profile'
 import DialogsContainer from './pages/Dialogs/DialogsContainer'
 import { Route, Routes } from 'react-router-dom'
 import UsersContainer from './pages/Users/UsersContainer'
+import ProfileContainer from './pages/Profile/ProfileContainer'
 
 const App = ({ state, dispatch, store }) => {
 	return (
@@ -14,7 +14,7 @@ const App = ({ state, dispatch, store }) => {
 				<Navbar sidebar={state.sidebar} />
 				<div className='content'>
 					<Routes>
-						<Route path='/profile' element={<Profile />} />
+						<Route path='/profile/:id' element={<ProfileContainer />} />
 						<Route path='/dialogs/*' element={<DialogsContainer />} />
 						<Route path='/users' element={<UsersContainer />} />
 					</Routes>

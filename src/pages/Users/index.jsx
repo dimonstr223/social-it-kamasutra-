@@ -3,6 +3,7 @@ import React from 'react'
 import style from '../../scss/pages/Users.module.scss'
 
 import avatarDefault from '../../img/avatar-default.jpg'
+import { Link } from 'react-router-dom'
 
 const Users = ({
 	users,
@@ -12,7 +13,6 @@ const Users = ({
 	follow,
 	unfollow,
 	onClickPage,
-	isFetching,
 }) => {
 	const pagesCount = Math.ceil(totalUsersCount / pageSize)
 	const pages = []
@@ -37,12 +37,16 @@ const Users = ({
 				{users.map(user => (
 					<li key={user.id}>
 						<div className={style.users__img}>
-							<img
-								src={
-									user.photos.small === null ? avatarDefault : user.photos.small
-								}
-								alt='user avatar'
-							/>
+							<Link to={`/profile/${user.id}`}>
+								<img
+									src={
+										user.photos.small === null
+											? avatarDefault
+											: user.photos.small
+									}
+									alt='user avatar'
+								/>
+							</Link>
 						</div>
 						<h3>{user.name}</h3>
 						{user.followed ? (
