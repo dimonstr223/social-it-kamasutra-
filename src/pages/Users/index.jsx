@@ -21,7 +21,7 @@ class Users extends React.Component {
 		this.props.setCurrentPage(pageNumber)
 		axios
 			.get(
-				`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${this.props.currentPage}`
+				`https://social-network.samuraijs.com/api/1.0/users?count=${this.props.pageSize}&page=${pageNumber}`
 			)
 			.then(res => this.props.setUsers(res.data.items))
 	}
