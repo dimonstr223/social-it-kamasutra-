@@ -5,6 +5,7 @@ import style from '../../scss/pages/Users.module.scss'
 import avatarDefault from '../../img/avatar-default.jpg'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { followAPI } from '../../api/api'
 
 const Users = ({
 	users,
@@ -53,19 +54,11 @@ const Users = ({
 						{user.followed ? (
 							<button
 								onClick={() => {
-									axios
-										.delete(
-											`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-											{
-												withCredentials: true,
-												'API-KEY': '3d2f3662-a805-4a0b-9573-b2311e11ccc1',
-											}
-										)
-										.then(res => {
-											if (res.data.resultCode === 0) {
-												unfollow(user.id)
-											}
-										})
+									followAPI.unfollow(user.id).then(data => {
+										if (data.resultCode === 0) {
+											unfollow(user.id)
+										}
+									})
 								}}
 							>
 								unfollow
@@ -73,20 +66,11 @@ const Users = ({
 						) : (
 							<button
 								onClick={() => {
-									axios
-										.post(
-											`https://social-network.samuraijs.com/api/1.0/follow/${user.id}`,
-											null,
-											{
-												withCredentials: true,
-												'API-KEY': '3d2f3662-a805-4a0b-9573-b2311e11ccc1',
-											}
-										)
-										.then(res => {
-											if (res.data.resultCode === 0) {
-												follow(user.id)
-											}
-										})
+									followAPI.follow(user.id).then(data => {
+										if (data.resultCode === 0) {
+											follow(user.id)
+										}
+									})
 								}}
 							>
 								follow
