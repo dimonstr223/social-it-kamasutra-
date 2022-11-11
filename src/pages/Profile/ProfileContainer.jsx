@@ -7,7 +7,6 @@ import { setUserProfile } from '../../redux/reducers/profileReducer'
 
 class ProfileContainer extends React.Component {
 	componentDidMount() {
-		debugger
 		let userId = this.props.router.params.id
 		if (!userId) userId = 2
 		axios
@@ -16,7 +15,6 @@ class ProfileContainer extends React.Component {
 	}
 
 	render() {
-		console.log(this.props.router.params)
 		return <Profile {...this.props} userProfile={this.props.userProfile} />
 	}
 }
