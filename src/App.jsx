@@ -14,6 +14,7 @@ const App = ({ state, dispatch, store }) => {
 				<Navbar sidebar={state.sidebar} />
 				<div className='content'>
 					<Routes>
+						<Route path='/profile' element={<ProfileContainer />} />
 						<Route path='/profile/:id' element={<ProfileContainer />} />
 						<Route path='/dialogs/*' element={<DialogsContainer />} />
 						<Route path='/users' element={<UsersContainer />} />
