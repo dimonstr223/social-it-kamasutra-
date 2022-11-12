@@ -56,13 +56,7 @@ const Users = ({
 								className={style.button}
 								disabled={followingUserId.some(id => id === user.id)}
 								onClick={() => {
-									toggleFollowingFetching(true, user.id)
-									followAPI.unfollow(user.id).then(data => {
-										if (data.resultCode === 0) {
-											unfollow(user.id)
-										}
-										toggleFollowingFetching(false, user.id)
-									})
+									unfollow(user.id)
 								}}
 							>
 								unfollow
@@ -72,13 +66,7 @@ const Users = ({
 								className={style.button}
 								disabled={followingUserId.some(id => id === user.id)}
 								onClick={() => {
-									toggleFollowingFetching(true, user.id)
-									followAPI.follow(user.id).then(data => {
-										if (data.resultCode === 0) {
-											follow(user.id)
-										}
-										toggleFollowingFetching(false, user.id)
-									})
+									follow(user.id)
 								}}
 							>
 								follow

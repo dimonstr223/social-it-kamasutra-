@@ -1,3 +1,5 @@
+import { followAPI, usersAPI } from '../../api/api'
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -62,15 +64,15 @@ const usersReducer = (state = initialState, action) => {
 				...state,
 				followingUserId: action.isFetching
 					? [...state.followingUserId, action.userId]
-					: state.followingUserId.filter(id => id != action.userId),
+					: state.followingUserId.filter(id => id !== action.userId),
 			}
 		default:
 			return state
 	}
 }
 
-export const follow = userId => ({ type: FOLLOW, userId })
-export const unfollow = userId => ({ type: UNFOLLOW, userId })
+export const followSuccess = userId => ({ type: FOLLOW, userId })
+export const unfollowSuccess = userId => ({ type: UNFOLLOW, userId })
 export const setUsers = users => ({ type: SET_USERS, users })
 export const setTotalUsersCount = totalUsersCount => ({
 	type: SET_TOTAL_USERS_COUNT,
@@ -89,5 +91,37 @@ export const toggleFollowingFetching = (isFetching, userId) => ({
 	isFetching,
 	userId,
 })
+
+export const getUsers = (pageSize, currentPage) => {
+	return dispatch => {
+		dispatch(toggleFetching(true))
+		usersAPI.getUsers(pageSize, currentPage).then(data => {
+			dispatch(toggleFetching(false))
+			dispatch(setUsers(data.items))
+			dispatch(setTotalUsersCount(data.totalCount))
+		})
+	}
+}
+export const unfollow = userId => dispatch => {
+	dispatch(toggleFollowingFetching(true, userId))
+	followAPI.unfollow(userId).then(data => {
+		if (data.resultCode === 0) {
+			dispatch(unfollowSuccess(userId))
+		}
+		dispatch(toggleFollowingFetching(false, userId))
+	})
+}
+
+export const follow = userId => {
+	return dispatch => {
+		dispatch(toggleFollowingFetching(true, userId))
+		followAPI.follow(userId).then(data => {
+			if (data.resultCode === 0) {
+				dispatch(followSuccess(userId))
+			}
+			dispatch(toggleFollowingFetching(false, userId))
+		})
+	}
+}
 
 export default usersReducer

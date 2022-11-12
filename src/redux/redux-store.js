@@ -1,4 +1,9 @@
-import { combineReducers, legacy_createStore as createStore } from 'redux'
+import thunk from 'redux-thunk'
+import {
+	applyMiddleware,
+	combineReducers,
+	legacy_createStore as createStore,
+} from 'redux'
 
 import profileReducer from './reducers/profileReducer'
 import dialogsReducer from './reducers/dialogsReducer'
@@ -14,7 +19,7 @@ const reducers = combineReducers({
 	auth: authReducer,
 })
 
-const store = createStore(reducers)
+const store = createStore(reducers, applyMiddleware(thunk))
 
 window.store = store
 export default store

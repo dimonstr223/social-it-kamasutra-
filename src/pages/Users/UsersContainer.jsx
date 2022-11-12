@@ -11,27 +11,17 @@ import {
 	setUsers,
 	toggleFetching,
 	toggleFollowingFetching,
+	getUsers,
 } from '../../redux/reducers/usersReducer'
 
 class UsersContainer extends React.Component {
 	componentDidMount = () => {
-		this.props.toggleFetching(true)
-		usersAPI
-			.getUsers(this.props.pageSize, this.props.currentPage)
-			.then(data => {
-				this.props.toggleFetching(false)
-				this.props.setUsers(data.items)
-				this.props.setTotalUsersCount(data.totalCount)
-			})
+		this.props.getUsers(this.props.pageSize, this.props.currentPage)
 	}
 
 	onClickPage = pageNumber => {
 		this.props.setCurrentPage(pageNumber)
-		this.props.toggleFetching(true)
-		usersAPI.getUsers(this.props.pageSize, pageNumber).then(data => {
-			this.props.toggleFetching(false)
-			this.props.setUsers(data.items)
-		})
+		this.props.getUsers(this.props.pageSize, pageNumber)
 	}
 
 	render() {
@@ -63,7 +53,6 @@ const mapStateToProps = state => ({
 	totalUsersCount: state.usersPage.totalUsersCount,
 	isFetching: state.usersPage.isFetching,
 	followingUserId: state.usersPage.followingUserId,
-	toggleFollowingFetching: state.usersPage.toggleFollowingFetching,
 })
 
 export default connect(mapStateToProps, {
@@ -74,4 +63,5 @@ export default connect(mapStateToProps, {
 	setCurrentPage,
 	toggleFetching,
 	toggleFollowingFetching,
+	getUsers,
 })(UsersContainer)
