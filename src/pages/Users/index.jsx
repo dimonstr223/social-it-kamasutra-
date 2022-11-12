@@ -4,7 +4,6 @@ import style from '../../scss/pages/Users.module.scss'
 
 import avatarDefault from '../../img/avatar-default.jpg'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 import { followAPI } from '../../api/api'
 
 const Users = ({
@@ -15,10 +14,11 @@ const Users = ({
 	follow,
 	unfollow,
 	onClickPage,
+	followingUserId,
+	toggleFollowingFetching,
 }) => {
 	const pagesCount = Math.ceil(totalUsersCount / pageSize)
 	const pages = []
-
 	for (let i = 1; i <= pagesCount; i++) {
 		pages.push(i)
 	}
@@ -53,11 +53,15 @@ const Users = ({
 						<h3>{user.name}</h3>
 						{user.followed ? (
 							<button
+								className={style.button}
+								disabled={followingUserId.some(id => id === user.id)}
 								onClick={() => {
+									toggleFollowingFetching(true, user.id)
 									followAPI.unfollow(user.id).then(data => {
 										if (data.resultCode === 0) {
 											unfollow(user.id)
 										}
+										toggleFollowingFetching(false, user.id)
 									})
 								}}
 							>
@@ -65,11 +69,15 @@ const Users = ({
 							</button>
 						) : (
 							<button
+								className={style.button}
+								disabled={followingUserId.some(id => id === user.id)}
 								onClick={() => {
+									toggleFollowingFetching(true, user.id)
 									followAPI.follow(user.id).then(data => {
 										if (data.resultCode === 0) {
 											follow(user.id)
 										}
+										toggleFollowingFetching(false, user.id)
 									})
 								}}
 							>

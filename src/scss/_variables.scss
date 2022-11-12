@@ -46,4 +46,8 @@ $contentBG: #ded8e9;
 	&:active {
 		@extend %active;
 	}
+	&:disabled {
+		background-color: $lightPurple;
+		color: $mainAction;
+	}
 }
