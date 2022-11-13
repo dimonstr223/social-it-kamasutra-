@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Users from '.'
-import { usersAPI } from '../../api/api'
 import Preloader from '../../components/common/preloader'
 import {
 	follow,

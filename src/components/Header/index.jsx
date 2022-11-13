@@ -6,7 +6,6 @@ import logo from '../../img/header-logo.png'
 import { Link } from 'react-router-dom'
 
 const Header = ({ login, isAuth }) => {
-	console.log(login)
 	return (
 		<header className={style.header}>
 			<Link to='/profile'>
