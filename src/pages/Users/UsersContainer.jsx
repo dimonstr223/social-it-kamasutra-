@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'redux'
 import Users from '.'
 import Preloader from '../../components/common/preloader'
 import whithAuthNavigate from '../../hoc/whithAuthNavigate'
@@ -51,11 +52,12 @@ const mapStateToProps = state => ({
 	isAuth: state.auth.isAuth,
 })
 
-export default whithAuthNavigate(
+export default compose(
+	whithAuthNavigate,
 	connect(mapStateToProps, {
 		follow,
 		unfollow,
 		setCurrentPage,
 		getUsers,
-	})(UsersContainer)
-)
+	})
+)(UsersContainer)

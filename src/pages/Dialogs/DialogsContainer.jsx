@@ -5,6 +5,7 @@ import {
 	updateMessageTextCreator,
 } from '../../redux/reducers/dialogsReducer'
 import whithAuthNavigate from '../../hoc/whithAuthNavigate'
+import { compose } from 'redux'
 
 const mapStateToProps = state => ({
 	dialogsPage: state.dialogsPage,
@@ -19,6 +20,7 @@ const mapDispatchToProps = dispatch => ({
 	},
 })
 
-export default whithAuthNavigate(
-	connect(mapStateToProps, mapDispatchToProps)(Dialogs)
-)
+export default compose(
+	whithAuthNavigate,
+	connect(mapStateToProps, mapDispatchToProps)
+)(Dialogs)

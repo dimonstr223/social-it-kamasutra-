@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { compose } from 'redux'
 import Profile from '.'
 import whithAuthNavigate from '../../hoc/whithAuthNavigate'
 import { getUserProfile } from '../../redux/reducers/profileReducer'
@@ -32,6 +33,8 @@ const mapStateToProps = state => ({
 	userProfile: state.profilePage.userProfile,
 })
 
-export default whithAuthNavigate(
-	connect(mapStateToProps, { getUserProfile })(withRouter(ProfileContainer))
-)
+export default compose(
+	whithAuthNavigate,
+	connect(mapStateToProps, { getUserProfile }),
+	withRouter
+)(ProfileContainer)
