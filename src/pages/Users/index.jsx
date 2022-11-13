@@ -1,10 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 import style from '../../scss/pages/Users.module.scss'
 
 import avatarDefault from '../../img/avatar-default.jpg'
-import { Link } from 'react-router-dom'
-import { followAPI } from '../../api/api'
 
 const Users = ({
 	users,
@@ -15,7 +14,6 @@ const Users = ({
 	unfollow,
 	onClickPage,
 	followingUserId,
-	toggleFollowingFetching,
 }) => {
 	const pagesCount = Math.ceil(totalUsersCount / pageSize)
 	const pages = []

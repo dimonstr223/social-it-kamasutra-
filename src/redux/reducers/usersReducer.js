@@ -71,10 +71,10 @@ const usersReducer = (state = initialState, action) => {
 	}
 }
 
-export const followSuccess = userId => ({ type: FOLLOW, userId })
-export const unfollowSuccess = userId => ({ type: UNFOLLOW, userId })
-export const setUsers = users => ({ type: SET_USERS, users })
-export const setTotalUsersCount = totalUsersCount => ({
+const followSuccess = userId => ({ type: FOLLOW, userId })
+const unfollowSuccess = userId => ({ type: UNFOLLOW, userId })
+const setUsers = users => ({ type: SET_USERS, users })
+const setTotalUsersCount = totalUsersCount => ({
 	type: SET_TOTAL_USERS_COUNT,
 	totalUsersCount,
 })
@@ -82,11 +82,11 @@ export const setCurrentPage = currentPage => ({
 	type: SET_CURRENT_PAGE,
 	currentPage,
 })
-export const toggleFetching = isFetching => ({
+const toggleFetching = isFetching => ({
 	type: TOGGLE_FETCHING,
 	isFetching,
 })
-export const toggleFollowingFetching = (isFetching, userId) => ({
+const toggleFollowingFetching = (isFetching, userId) => ({
 	type: TOGGLE_FOLLOWING_FETCHING,
 	isFetching,
 	userId,
@@ -96,9 +96,9 @@ export const getUsers = (pageSize, currentPage) => {
 	return dispatch => {
 		dispatch(toggleFetching(true))
 		usersAPI.getUsers(pageSize, currentPage).then(data => {
-			dispatch(toggleFetching(false))
 			dispatch(setUsers(data.items))
 			dispatch(setTotalUsersCount(data.totalCount))
+			dispatch(toggleFetching(false))
 		})
 	}
 }

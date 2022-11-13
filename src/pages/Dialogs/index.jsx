@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom'
 
 import DialogsItem from '../../components/DialogsItem'
 import Message from '../../components/Message'
+import whithAuthNavigate from '../../hoc/whithAuthNavigate'
 
 import style from '../../scss/pages/Dialogs.module.scss'
 
@@ -22,8 +23,6 @@ const Dialogs = ({ dialogsPage, updateMessageText, sendMessage, isAuth }) => {
 	const onSendMessage = () => {
 		sendMessage()
 	}
-
-	if (!isAuth) return <Navigate to='/login' />
 
 	return (
 		<div className={style.dialogs__wrapper}>
