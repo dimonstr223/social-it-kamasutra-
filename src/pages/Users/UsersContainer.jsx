@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Navigate } from 'react-router-dom'
 import Users from '.'
 import Preloader from '../../components/common/preloader'
 import {
@@ -24,6 +25,7 @@ class UsersContainer extends React.Component {
 	}
 
 	render() {
+		if (!this.props.isAuth) return <Navigate to='/login' />
 		return (
 			<>
 				{this.props.isFetching ? <Preloader /> : null}
@@ -52,6 +54,7 @@ const mapStateToProps = state => ({
 	totalUsersCount: state.usersPage.totalUsersCount,
 	isFetching: state.usersPage.isFetching,
 	followingUserId: state.usersPage.followingUserId,
+	isAuth: state.auth.isAuth,
 })
 
 export default connect(mapStateToProps, {

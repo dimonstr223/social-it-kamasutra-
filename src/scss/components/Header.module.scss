@@ -30,7 +30,7 @@
 	}
 
 	.authLogin {
-		color: $green;
+		color: $accentPink;
 		margin-right: 20px;
 		font-size: 24px;
 	}
@@ -40,7 +40,6 @@
 		&__button {
 			@extend %button;
 			margin: 0 20px 0 0;
-			height: 100%;
 			font-size: 24px;
 		}
 	}
