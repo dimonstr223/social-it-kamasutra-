@@ -5,6 +5,7 @@ import style from '../scss/components/ProfileInfo.module.scss'
 class ProfileStatus extends React.Component {
 	state = {
 		editMode: false,
+		status: this.props.status,
 	}
 
 	activateEditMode = () => {
@@ -17,6 +18,14 @@ class ProfileStatus extends React.Component {
 		this.setState({
 			editMode: false,
 		})
+		this.props.updateStatus(this.state.status)
+	}
+
+	onStatusChange = e => {
+		const newStatus = e.currentTarget.value
+		this.setState({
+			status: newStatus,
+		})
 	}
 
 	render() {
@@ -28,7 +37,8 @@ class ProfileStatus extends React.Component {
 							onBlur={() => this.deactivateEditMode()}
 							autoFocus={true}
 							type='text'
-							value={this.props.aboutMe}
+							value={this.state.status}
+							onChange={e => this.onStatusChange(e)}
 						/>
 					</div>
 				) : (
@@ -37,7 +47,7 @@ class ProfileStatus extends React.Component {
 							onClick={() => this.activateEditMode()}
 							className={style.status}
 						>
-							{this.props.aboutMe}
+							{this.props.status || '---------'}
 						</div>
 					</div>
 				)}

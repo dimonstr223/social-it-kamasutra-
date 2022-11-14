@@ -5,7 +5,7 @@ import Preloader from './common/preloader'
 import avaDefault from '../img/avatar-default.jpg'
 import ProfileStatus from './ProfileStatus'
 
-const ProfileInfo = ({ userProfile }) => {
+const ProfileInfo = ({ userProfile, status, updateStatus }) => {
 	if (!userProfile) {
 		return <Preloader />
 	}
@@ -16,7 +16,7 @@ const ProfileInfo = ({ userProfile }) => {
 			</div>
 			<div className={style.description}>
 				<h3 className={style.name}> {userProfile.fullName}</h3>
-				<ProfileStatus aboutMe={userProfile.aboutMe} />
+				<ProfileStatus status={status} updateStatus={updateStatus} />
 			</div>
 		</div>
 	)

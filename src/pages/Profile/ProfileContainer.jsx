@@ -1,16 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Navigate, useLocation, useNavigate, useParams } from 'react-router-dom'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { compose } from 'redux'
 import Profile from '.'
 import whithAuthNavigate from '../../hoc/whithAuthNavigate'
-import { getUserProfile } from '../../redux/reducers/profileReducer'
+import {
+	getUserProfile,
+	getStatus,
+	updateStatus,
+} from '../../redux/reducers/profileReducer'
 
 class ProfileContainer extends React.Component {
 	componentDidMount() {
 		let userId = this.props.router.params.id
 		if (!userId) userId = 2
 		this.props.getUserProfile(userId)
+		this.props.getStatus(userId)
 	}
 
 	render() {
@@ -31,10 +36,11 @@ function withRouter(Component) {
 
 const mapStateToProps = state => ({
 	userProfile: state.profilePage.userProfile,
+	status: state.profilePage.status,
 })
 
 export default compose(
 	whithAuthNavigate,
-	connect(mapStateToProps, { getUserProfile }),
+	connect(mapStateToProps, { getUserProfile, getStatus, updateStatus }),
 	withRouter
 )(ProfileContainer)
