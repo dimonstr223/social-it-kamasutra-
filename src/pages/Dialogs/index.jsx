@@ -14,20 +14,20 @@ const Dialogs = ({ dialogsPage, updateMessageText, sendMessage, isAuth }) => {
 		<Message key={message.id} message={message.message} />
 	))
 
-	// const onMessageChange = e => {
-	// 	const text = e.target.value
-	// 	updateMessageText(text)
-	// }
-
-	// const onSendMessage = () => {
-	// 	sendMessage()
-	// }
-
 	const { handleSubmit, register, reset } = useForm({ mode: 'onBlur' })
 
 	const onSubmit = value => {
 		sendMessage(value.message)
 		reset()
+	}
+
+	const DialogsForm = () => {
+		return (
+			<form onSubmit={handleSubmit(onSubmit)} className={style.communication}>
+				<textarea className={style.input} {...register('message')} />
+				<input type='submit' className={style.btn} value='send' />
+			</form>
+		)
 	}
 
 	return (
@@ -39,22 +39,7 @@ const Dialogs = ({ dialogsPage, updateMessageText, sendMessage, isAuth }) => {
 
 			<div className={style.messages__wrapper}>
 				<div className={style.messages}>{messagesElements}</div>
-				{/*<div className={style.communication}>
-					 <textarea
-						onChange={onMessageChange}
-						value={dialogsPage.newMessageText}
-						className={style.input}
-						type='text'
-					/>
-					<button onClick={onSendMessage} className={style.btn}>
-						Send
-					</button> 
-				</div>
-					*/}
-				<form onSubmit={handleSubmit(onSubmit)} className={style.communication}>
-					<textarea className={style.input} {...register('message')} />
-					<input type='submit' className={style.btn} />
-				</form>
+				<DialogsForm />
 			</div>
 		</div>
 	)

@@ -16,7 +16,6 @@ const initialState = {
 			message: 'Hello. Did you katch Naruto and his demon chakura?',
 		},
 	],
-	newMessageText: '',
 }
 
 const dialogsReducer = (state = initialState, action) => {

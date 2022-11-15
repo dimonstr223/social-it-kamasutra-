@@ -1,41 +1,34 @@
 import React from 'react'
+import { useForm } from 'react-hook-form'
 
 import style from '../../scss/components/Posts.module.scss'
 
 import PostItem from './PostItem'
 
-const Posts = ({ profilePage, updatePostText, addPost }) => {
+const PostsForm = ({ addPost }) => {
+	const { register, handleSubmit, reset } = useForm()
+	const onSubmit = value => {
+		addPost(value.message)
+		reset()
+	}
+	return (
+		<form onSubmit={handleSubmit(onSubmit)} className={style.communication}>
+			<textarea {...register('message')} className={style.input} />
+			<input type='submit' className={style.btn} value={'add post'} />
+		</form>
+	)
+}
+
+const Posts = ({ profilePage, addPost }) => {
 	const postsElements = profilePage.posts.map((post, i) => (
 		<PostItem key={i} message={post.message} />
 	))
-
-	const postRef = React.useRef(null)
-
-	const onPostChange = () => {
-		const text = postRef.current.value
-		updatePostText(text)
-	}
-
-	const onAddPost = () => {
-		addPost()
-	}
 
 	return (
 		<div className={style.post}>
 			<div className={style.wrapper}>
 				<h3>Posts</h3>
-				<div className={style.communication}>
-					<textarea
-						onChange={onPostChange}
-						value={profilePage.newPostText}
-						ref={postRef}
-						className={style.input}
-						type='text'
-					/>
-					<button onClick={onAddPost} className={style.btn}>
-						Add post
-					</button>
-				</div>
+				<PostsForm addPost={addPost} />
 			</div>
 			<ul className={style.post__list}>{postsElements}</ul>
 		</div>
