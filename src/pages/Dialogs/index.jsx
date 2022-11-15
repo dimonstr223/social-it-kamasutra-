@@ -1,9 +1,8 @@
 import React from 'react'
-import { Navigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 
 import DialogsItem from '../../components/DialogsItem'
 import Message from '../../components/Message'
-import whithAuthNavigate from '../../hoc/whithAuthNavigate'
 
 import style from '../../scss/pages/Dialogs.module.scss'
 
@@ -15,13 +14,20 @@ const Dialogs = ({ dialogsPage, updateMessageText, sendMessage, isAuth }) => {
 		<Message key={message.id} message={message.message} />
 	))
 
-	const onMessageChange = e => {
-		const text = e.target.value
-		updateMessageText(text)
-	}
+	// const onMessageChange = e => {
+	// 	const text = e.target.value
+	// 	updateMessageText(text)
+	// }
 
-	const onSendMessage = () => {
-		sendMessage()
+	// const onSendMessage = () => {
+	// 	sendMessage()
+	// }
+
+	const { handleSubmit, register, reset } = useForm({ mode: 'onBlur' })
+
+	const onSubmit = value => {
+		sendMessage(value.message)
+		reset()
 	}
 
 	return (
@@ -33,8 +39,8 @@ const Dialogs = ({ dialogsPage, updateMessageText, sendMessage, isAuth }) => {
 
 			<div className={style.messages__wrapper}>
 				<div className={style.messages}>{messagesElements}</div>
-				<div className={style.communication}>
-					<textarea
+				{/*<div className={style.communication}>
+					 <textarea
 						onChange={onMessageChange}
 						value={dialogsPage.newMessageText}
 						className={style.input}
@@ -42,8 +48,13 @@ const Dialogs = ({ dialogsPage, updateMessageText, sendMessage, isAuth }) => {
 					/>
 					<button onClick={onSendMessage} className={style.btn}>
 						Send
-					</button>
+					</button> 
 				</div>
+					*/}
+				<form onSubmit={handleSubmit(onSubmit)} className={style.communication}>
+					<textarea className={style.input} {...register('message')} />
+					<input type='submit' className={style.btn} />
+				</form>
 			</div>
 		</div>
 	)

@@ -1,0 +1,39 @@
+@import '../variables';
+
+.formWrapper {
+	h1 {
+		margin-bottom: 20px;
+	}
+	margin: 0 auto;
+	max-width: 400px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	max-width: 400px;
+	gap: 20px;
+
+	.errors {
+		color: $error;
+		text-align: end;
+		font-size: 16px;
+	}
+
+	.input {
+		margin-top: 5px;
+		@extend %input;
+	}
+	.checkbox {
+		display: flex;
+		gap: 10px;
+		input {
+			width: 20px;
+		}
+	}
+
+	.button {
+		@extend %button;
+		margin-top: 0;
+	}
+}
