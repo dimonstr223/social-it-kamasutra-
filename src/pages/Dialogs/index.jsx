@@ -6,29 +6,29 @@ import Message from '../../components/Message'
 
 import style from '../../scss/pages/Dialogs.module.scss'
 
-const Dialogs = ({ dialogsPage, updateMessageText, sendMessage, isAuth }) => {
+const DialogsForm = ({ sendMessage }) => {
+	const { handleSubmit, register, reset } = useForm({ mode: 'onBlur' })
+
+	const onSubmit = value => {
+		value.message && sendMessage(value.message)
+		reset()
+	}
+
+	return (
+		<form onSubmit={handleSubmit(onSubmit)} className={style.communication}>
+			<textarea className={style.input} {...register('message')} />
+			<input type='submit' className={style.btn} value='send' />
+		</form>
+	)
+}
+
+const Dialogs = ({ dialogsPage, sendMessage }) => {
 	const dialogsElements = dialogsPage.dialogs.map(dialog => (
 		<DialogsItem key={dialog.id} name={dialog.name} id={dialog.id} />
 	))
 	const messagesElements = dialogsPage.messages.map(message => (
 		<Message key={message.id} message={message.message} />
 	))
-
-	const { handleSubmit, register, reset } = useForm({ mode: 'onBlur' })
-
-	const onSubmit = value => {
-		sendMessage(value.message)
-		reset()
-	}
-
-	const DialogsForm = () => {
-		return (
-			<form onSubmit={handleSubmit(onSubmit)} className={style.communication}>
-				<textarea className={style.input} {...register('message')} />
-				<input type='submit' className={style.btn} value='send' />
-			</form>
-		)
-	}
 
 	return (
 		<div className={style.dialogs__wrapper}>
@@ -39,7 +39,7 @@ const Dialogs = ({ dialogsPage, updateMessageText, sendMessage, isAuth }) => {
 
 			<div className={style.messages__wrapper}>
 				<div className={style.messages}>{messagesElements}</div>
-				<DialogsForm />
+				<DialogsForm sendMessage={sendMessage} />
 			</div>
 		</div>
 	)

@@ -7,13 +7,18 @@ import PostItem from './PostItem'
 
 const PostsForm = ({ addPost }) => {
 	const { register, handleSubmit, reset } = useForm()
+
 	const onSubmit = value => {
-		addPost(value.message)
+		value.message && addPost(value.message)
 		reset()
 	}
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={style.communication}>
-			<textarea {...register('message')} className={style.input} />
+			<textarea
+				autoFocus={true}
+				className={style.input}
+				{...register('message')}
+			/>
 			<input type='submit' className={style.btn} value={'add post'} />
 		</form>
 	)

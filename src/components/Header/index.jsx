@@ -5,7 +5,10 @@ import style from '../../scss/components/Header.module.scss'
 import logo from '../../img/header-logo.png'
 import { Link } from 'react-router-dom'
 
-const Header = ({ login, isAuth }) => {
+const Header = ({ login, isAuth, logout }) => {
+	const onLogout = () => {
+		logout()
+	}
 	return (
 		<header className={style.header}>
 			<Link to='/profile'>
@@ -15,7 +18,14 @@ const Header = ({ login, isAuth }) => {
 				</div>
 			</Link>
 			{isAuth ? (
-				<div className={style.authLogin}>{login}</div>
+				<div className={style.authLogin}>
+					<div>{login}</div>
+					<div>
+						<button onClick={() => onLogout()} className={style.logoutButton}>
+							LogOut
+						</button>
+					</div>
+				</div>
 			) : (
 				<div className={style.login}>
 					<Link to='/login'>

@@ -20,6 +20,13 @@ export const followAPI = {
 }
 export const authAPI = {
 	me: () => instance.get(`auth/me`).then(res => res.data),
+
+	login: (email, password, rememberMe) =>
+		instance
+			.post('auth/login', { email, password, rememberMe })
+			.then(res => res.data),
+
+	logout: () => instance.delete('auth/login').then(res => res.data),
 }
 export const profileAPI = {
 	getProfile: userId => instance.get(`profile/${userId}`).then(res => res.data),

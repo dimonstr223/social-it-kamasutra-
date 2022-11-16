@@ -1,9 +1,12 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { connect } from 'react-redux'
 
 import style from '../../scss/pages/LoginForm.module.scss'
+import { login } from '../../redux/reducers/authReducer'
+import { Navigate } from 'react-router-dom'
 
-const LoginForm = () => {
+const LoginForm = ({ login }) => {
 	const {
 		register,
 		handleSubmit,
@@ -14,15 +17,16 @@ const LoginForm = () => {
 	})
 
 	const onSubmit = data => {
-		console.log(data)
+		const { email, password, rememberMe } = data
+		login(email, password, rememberMe)
 		reset()
 	}
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={style.form}>
 			<label>
-				Login
+				Email
 				<input
-					{...register('login', { required: true })}
+					{...register('email', { required: true })}
 					className={style.input}
 				/>
 				<div className={style.errors}>
@@ -35,6 +39,7 @@ const LoginForm = () => {
 				<input
 					{...register('password', { required: true })}
 					className={style.input}
+					type='password'
 				/>
 				<div className={style.errors}>
 					{errors?.password && <div>Required field</div>}
@@ -42,7 +47,7 @@ const LoginForm = () => {
 			</label>
 
 			<label className={style.checkbox}>
-				<input type='checkbox' {...register('remember')} />
+				<input type='checkbox' {...register('rememberMe')} />
 				Remember me
 			</label>
 
@@ -51,13 +56,21 @@ const LoginForm = () => {
 	)
 }
 
-const Login = () => {
+const Login = props => {
+	if (props.isAuth) {
+		return <Navigate to='/profile' />
+	}
+
 	return (
 		<div className={style.formWrapper}>
 			<h1>Login</h1>
-			<LoginForm />
+			<LoginForm {...props} />
 		</div>
 	)
 }
 
-export default Login
+const mapStateToProps = state => ({
+	isAuth: state.auth.isAuth,
+})
+
+export default connect(mapStateToProps, { login })(Login)
