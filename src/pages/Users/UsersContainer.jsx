@@ -8,17 +8,26 @@ import {
 	follow,
 	unfollow,
 	setCurrentPage,
-	getUsers,
+	fetchUsers,
 } from '../../redux/reducers/usersReducer'
+import {
+	getCurrentPage,
+	getFollowingUserId,
+	getIsAuth,
+	getIsFetchint,
+	getPageSize,
+	getTotalUsersCount,
+	getUsers,
+} from '../../redux/selectors/selectors'
 
 class UsersContainer extends React.Component {
 	componentDidMount = () => {
-		this.props.getUsers(this.props.pageSize, this.props.currentPage)
+		this.props.fetchUsers(this.props.pageSize, this.props.currentPage)
 	}
 
 	onClickPage = pageNumber => {
 		this.props.setCurrentPage(pageNumber)
-		this.props.getUsers(this.props.pageSize, pageNumber)
+		this.props.fetchUsers(this.props.pageSize, pageNumber)
 	}
 
 	render() {
@@ -43,13 +52,13 @@ class UsersContainer extends React.Component {
 
 // Connect Container Component
 const mapStateToProps = state => ({
-	users: state.usersPage.users,
-	pageSize: state.usersPage.pageSize,
-	currentPage: state.usersPage.currentPage,
-	totalUsersCount: state.usersPage.totalUsersCount,
-	isFetching: state.usersPage.isFetching,
-	followingUserId: state.usersPage.followingUserId,
-	isAuth: state.auth.isAuth,
+	users: getUsers(state),
+	pageSize: getPageSize(state),
+	currentPage: getCurrentPage(state),
+	totalUsersCount: getTotalUsersCount(state),
+	isFetching: getIsFetchint(state),
+	followingUserId: getFollowingUserId(state),
+	isAuth: getIsAuth(state),
 })
 
 export default compose(
@@ -58,6 +67,6 @@ export default compose(
 		follow,
 		unfollow,
 		setCurrentPage,
-		getUsers,
+		fetchUsers,
 	})
 )(UsersContainer)

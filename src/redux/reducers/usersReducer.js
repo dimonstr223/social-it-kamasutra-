@@ -52,7 +52,7 @@ const usersReducer = (state = initialState, action) => {
 		case SET_CURRENT_PAGE:
 			return {
 				...state,
-				currentPage: action.currentPage,
+				currentPage: action.page,
 			}
 		case TOGGLE_FETCHING:
 			return {
@@ -78,9 +78,9 @@ const setTotalUsersCount = totalUsersCount => ({
 	type: SET_TOTAL_USERS_COUNT,
 	totalUsersCount,
 })
-export const setCurrentPage = currentPage => ({
+export const setCurrentPage = page => ({
 	type: SET_CURRENT_PAGE,
-	currentPage,
+	page,
 })
 const toggleFetching = isFetching => ({
 	type: TOGGLE_FETCHING,
@@ -92,10 +92,10 @@ const toggleFollowingFetching = (isFetching, userId) => ({
 	userId,
 })
 
-export const getUsers = (pageSize, currentPage) => {
+export const fetchUsers = (pageSize, page) => {
 	return dispatch => {
 		dispatch(toggleFetching(true))
-		usersAPI.getUsers(pageSize, currentPage).then(data => {
+		usersAPI.getUsers(pageSize, page).then(data => {
 			dispatch(setUsers(data.items))
 			dispatch(setTotalUsersCount(data.totalCount))
 			dispatch(toggleFetching(false))

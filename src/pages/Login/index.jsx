@@ -30,7 +30,7 @@ const LoginForm = ({ login }) => {
 					className={style.input}
 				/>
 				<div className={style.errors}>
-					{errors?.login && <div>Required field</div>}
+					{errors?.email && <div>Required field</div>}
 				</div>
 			</label>
 
@@ -51,7 +51,12 @@ const LoginForm = ({ login }) => {
 				Remember me
 			</label>
 
-			<input className={style.button} disabled={!isValid} type='submit' />
+			<input
+				className={style.button}
+				disabled={!isValid}
+				type='submit'
+				value='Login'
+			/>
 		</form>
 	)
 }
