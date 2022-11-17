@@ -1,66 +1,47 @@
 import React from 'react'
 
 import style from '../scss/components/ProfileInfo.module.scss'
+const ProfileStatus = props => {
+	const [editMode, setEditMode] = React.useState(false)
+	const [status, setStatus] = React.useState(props.status)
 
-class ProfileStatus extends React.Component {
-	state = {
-		editMode: false,
-		status: this.props.status,
+	React.useEffect(() => {
+		setStatus(props.status)
+	}, [props.status])
+
+	const activateEditMode = () => {
+		setEditMode(true)
 	}
 
-	activateEditMode = () => {
-		this.setState({
-			editMode: true,
-		})
+	const deactivateEditMode = () => {
+		setEditMode(false)
+		props.updateStatus(status)
 	}
 
-	deactivateEditMode = () => {
-		this.setState({
-			editMode: false,
-		})
-		this.props.updateStatus(this.state.status)
+	const onStatusChange = e => {
+		setStatus(e.currentTarget.value)
 	}
 
-	onStatusChange = e => {
-		const newStatus = e.currentTarget.value
-		this.setState({
-			status: newStatus,
-		})
-	}
-	componentDidUpdate(prevProps, prevState) {
-		if (prevProps.status !== this.props.status) {
-			this.setState({
-				status: this.props.status,
-			})
-		}
-	}
-
-	render() {
-		return (
-			<>
-				{this.state.editMode ? (
-					<div>
-						<input
-							onBlur={() => this.deactivateEditMode()}
-							autoFocus={true}
-							type='text'
-							value={this.state.status}
-							onChange={e => this.onStatusChange(e)}
-						/>
+	return (
+		<>
+			{editMode ? (
+				<div>
+					<input
+						onChange={e => onStatusChange(e)}
+						value={status}
+						onBlur={() => deactivateEditMode()}
+						autoFocus={true}
+					/>
+				</div>
+			) : (
+				<div>
+					<div onClick={() => activateEditMode()} className={style.status}>
+						{props.status || '---------'}
 					</div>
-				) : (
-					<div>
-						<div
-							onClick={() => this.activateEditMode()}
-							className={style.status}
-						>
-							{this.props.status || '---------'}
-						</div>
-					</div>
-				)}
-			</>
-		)
-	}
+				</div>
+			)}
+		</>
+	)
 }
 
 export default ProfileStatus
