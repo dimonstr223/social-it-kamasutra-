@@ -24,7 +24,7 @@ const PostsForm = ({ addPost }) => {
 	)
 }
 
-const Posts = ({ profilePage, addPost }) => {
+const Posts = React.memo(({ profilePage, addPost }) => {
 	const postsElements = profilePage.posts.map((post, i) => (
 		<PostItem key={i} message={post.message} />
 	))
@@ -38,6 +38,6 @@ const Posts = ({ profilePage, addPost }) => {
 			<ul className={style.post__list}>{postsElements}</ul>
 		</div>
 	)
-}
+})
 
 export default Posts

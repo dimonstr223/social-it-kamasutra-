@@ -43,5 +43,4 @@ const ProfileStatus = props => {
 		</>
 	)
 }
-
 export default ProfileStatus
