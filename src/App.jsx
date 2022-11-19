@@ -10,8 +10,8 @@ import HeaderContainer from './components/Header/HeaderContainer'
 import Login from './pages/Login'
 
 import { initializeApp } from './redux/reducers/appReducer'
-import './scss/App.scss'
 import Preloader from './components/common/preloader'
+import './scss/App.scss'
 
 class App extends React.Component {
 	componentDidMount() {

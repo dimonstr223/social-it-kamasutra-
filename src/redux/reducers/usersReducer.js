@@ -1,4 +1,5 @@
 import { followAPI, usersAPI } from '../../api/api'
+import { updateObjectInArray } from '../../utils/objectHelpers'
 
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
@@ -22,21 +23,15 @@ const usersReducer = (state = initialState, action) => {
 		case FOLLOW:
 			return {
 				...state,
-				users: state.users.map(user => {
-					if (user.id === action.userId) {
-						return { ...user, followed: true }
-					}
-					return user
+				users: updateObjectInArray(state.users, 'id', action.userId, {
+					followed: true,
 				}),
 			}
 		case UNFOLLOW:
 			return {
 				...state,
-				users: state.users.map(user => {
-					if (user.id === action.userId) {
-						return { ...user, followed: false }
-					}
-					return user
+				users: updateObjectInArray(state.users, 'id', action.userId, {
+					followed: false,
 				}),
 			}
 		case SET_USERS:
@@ -92,36 +87,43 @@ const toggleFollowingFetching = (isFetching, userId) => ({
 	userId,
 })
 
-export const fetchUsers = (pageSize, page) => {
-	return dispatch => {
-		dispatch(toggleFetching(true))
-		usersAPI.getUsers(pageSize, page).then(data => {
-			dispatch(setUsers(data.items))
-			dispatch(setTotalUsersCount(data.totalCount))
-			dispatch(toggleFetching(false))
-		})
-	}
-}
-export const unfollow = userId => dispatch => {
-	dispatch(toggleFollowingFetching(true, userId))
-	followAPI.unfollow(userId).then(data => {
-		if (data.resultCode === 0) {
-			dispatch(unfollowSuccess(userId))
-		}
-		dispatch(toggleFollowingFetching(false, userId))
-	})
+export const fetchUsers = (pageSize, page) => async dispatch => {
+	dispatch(toggleFetching(true))
+	const { data } = await usersAPI.getUsers(pageSize, page)
+	dispatch(setUsers(data.items))
+	dispatch(setTotalUsersCount(data.totalCount))
+	dispatch(toggleFetching(false))
 }
 
-export const follow = userId => {
-	return dispatch => {
-		dispatch(toggleFollowingFetching(true, userId))
-		followAPI.follow(userId).then(data => {
-			if (data.resultCode === 0) {
-				dispatch(followSuccess(userId))
-			}
-			dispatch(toggleFollowingFetching(false, userId))
-		})
+const followUnfollowFlow = async (
+	dispatch,
+	userId,
+	apiMethod,
+	actionCreator
+) => {
+	dispatch(toggleFollowingFetching(true, userId))
+	const { data } = await apiMethod(userId)
+	if (data.resultCode === 0) {
+		dispatch(actionCreator(userId))
 	}
+	dispatch(toggleFollowingFetching(false, userId))
+}
+
+export const unfollow = userId => async dispatch => {
+	followUnfollowFlow(
+		dispatch,
+		userId,
+		followAPI.unfollow.bind(followAPI),
+		unfollowSuccess
+	)
+}
+export const follow = userId => async dispatch => {
+	followUnfollowFlow(
+		dispatch,
+		userId,
+		followAPI.follow.bind(followAPI),
+		followSuccess
+	)
 }
 
 export default usersReducer
