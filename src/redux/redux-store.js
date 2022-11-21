@@ -2,6 +2,7 @@ import thunk from 'redux-thunk'
 import {
 	applyMiddleware,
 	combineReducers,
+	compose,
 	legacy_createStore as createStore,
 } from 'redux'
 
@@ -21,7 +22,8 @@ const reducers = combineReducers({
 	app: appReducer,
 })
 
-const store = createStore(reducers, applyMiddleware(thunk))
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const store = createStore(reducers, composeEnhancers(applyMiddleware(thunk)))
 
-window.store = store
+window._store_ = store
 export default store

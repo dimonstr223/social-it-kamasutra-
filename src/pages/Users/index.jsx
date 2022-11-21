@@ -25,15 +25,18 @@ const Users = ({
 		/>
 	))
 	return (
-		<div>
-			<Paginator
-				totalUsersCount={totalUsersCount}
-				pageSize={pageSize}
-				currentPage={currentPage}
-				onClickPage={onClickPage}
-			/>
+		<>
+			<div id='container'>
+				<Paginator
+					users={users}
+					totalUsersCount={totalUsersCount}
+					pageSize={pageSize}
+					currentPage={currentPage}
+					onClickPage={onClickPage}
+				/>
+			</div>
 			<ul className={style.users__list}>{usersElements}</ul>
-		</div>
+		</>
 	)
 }
 
